@@ -1,8 +1,15 @@
-import type { RequestListener, IncomingMessage, ServerResponse } from 'http';
+import type { RequestListener as HttpRequestListener } from 'http';
 
 import { Route } from './route';
 import { Router } from './router';
-import type { Middleware, ErrorMiddleware } from './types';
+import type {
+  RawRequest,
+  Request,
+  Response,
+  Middleware,
+  ErrorMiddleware,
+  RequestListener
+} from './types';
 
 /**
  * This class provides a simple http framework.
@@ -93,13 +100,10 @@ export class Simpress {
   }
 
   /**
-   * Converts the instance to an @see RequestListener .
+   * Converts the instance to an @see http.RequestListener .
    */
-  toListener() {
-    return async (
-      req: IncomingMessage & { pathRegex?: RegExp },
-      res: ServerResponse & { req: IncomingMessage }
-    ) => {
+  toListener(): HttpRequestListener {
+    return async (req: RawRequest & { pathRegex?: RegExp }, res: Response) => {
       for (const router of this._routers) {
         for (const [_, route] of router.routes) {
           // check path and method
@@ -109,22 +113,13 @@ export class Simpress {
             for (const level of [this, router, route]) {
               for (const middleware of level.middlewares) {
                 let err = await new Promise(resolve =>
-                  middleware(
-                    req as IncomingMessage & { pathRegex: RegExp },
-                    res,
-                    resolve
-                  )
+                  middleware(req as Request, res, resolve)
                 );
 
                 if (err !== undefined) {
                   for (const errMiddleware of level.errMiddlewares) {
                     err = await new Promise(resolve =>
-                      errMiddleware(
-                        err,
-                        req as IncomingMessage & { pathRegex: RegExp },
-                        res,
-                        resolve
-                      )
+                      errMiddleware(err, req as Request, res, resolve)
                     );
 
                     if (err === undefined) return;
@@ -135,7 +130,7 @@ export class Simpress {
               }
             }
 
-            route.listener(req, res);
+            route.listener(req as Request, res);
 
             return;
           }

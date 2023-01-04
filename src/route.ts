@@ -1,6 +1,4 @@
-import type { RequestListener } from 'http';
-
-import type { Middleware, ErrorMiddleware } from './types';
+import type { Middleware, ErrorMiddleware, RequestListener } from './types';
 
 export class Route {
   /**

@@ -1,13 +1,14 @@
-import type { IncomingMessage, ServerResponse } from 'http';
 import url from 'url';
 import type { ParsedUrlQuery } from 'querystring';
+
+import type { Request, Response } from './types';
 
 /**
  * Appends a JSON body parser middleware.
  */
 export function applyJsonBodyParser(
-  req: IncomingMessage & { body?: unknown },
-  res: ServerResponse,
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) {
   const body: Uint8Array[] = [];
@@ -30,8 +31,8 @@ export function applyJsonBodyParser(
  * Appends a query params parser middleware.
  */
 export function applyQueryParamsParser(
-  req: IncomingMessage & { queryParams?: ParsedUrlQuery },
-  res: ServerResponse,
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) {
   req.queryParams = url.parse(req.url ?? '', true).query;
@@ -42,11 +43,8 @@ export function applyQueryParamsParser(
  * Appends a path params parser middleware.
  */
 export function applyPathParamsParser(
-  req: IncomingMessage & {
-    pathRegex: RegExp;
-    pathParams?: Record<string, string> | null;
-  },
-  res: ServerResponse,
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) {
   const matches = req.url?.match(req.pathRegex);
@@ -59,12 +57,8 @@ export function applyPathParamsParser(
  * Appends a request console logger middleware.
  */
 export function applyRequestConsoleLogger(
-  req: IncomingMessage & {
-    pathParams?: Record<string, string> | null;
-    queryParams?: ParsedUrlQuery;
-    body?: unknown;
-  },
-  res: ServerResponse,
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) {
   console.log(

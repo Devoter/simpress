@@ -1,20 +1,43 @@
-import type { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
+import type { ParsedUrlQuery } from 'querystring';
 
-export type Middleware<
-  Request extends typeof IncomingMessage = typeof IncomingMessage,
-  Response extends typeof ServerResponse = typeof ServerResponse
-> = (
-  req: InstanceType<Request> & { pathRegex: RegExp },
-  res: InstanceType<Response> & { req: InstanceType<Request> },
+export type RawBody = { body?: unknown };
+
+export type QueryParams = { queryParams?: ParsedUrlQuery };
+
+export type PathParams = { pathParams?: Record<string, string> | null };
+
+export type RawRequest<T = IncomingMessage> = T extends IncomingMessage
+  ? T
+  : never;
+
+export type Request<
+  T = IncomingMessage & { pathRegex: RegExp } & RawBody &
+    QueryParams &
+    PathParams
+> = T extends IncomingMessage & { pathRegex: RegExp } & RawBody &
+  QueryParams &
+  PathParams
+  ? T
+  : never;
+
+export type Response<T = ServerResponse & { req: IncomingMessage }> =
+  T extends ServerResponse & { req: IncomingMessage } ? T : never;
+
+export type Middleware = (
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) => void;
 
-export type ErrorMiddleware<
-  Request extends typeof IncomingMessage = typeof IncomingMessage,
-  Response extends typeof ServerResponse = typeof ServerResponse
-> = (
+export type ErrorMiddleware = (
   err: unknown,
-  req: InstanceType<Request> & { pathRegex: RegExp },
-  res: InstanceType<Response> & { req: InstanceType<Request> },
+  req: Request,
+  res: Response,
   next: (err?: unknown) => void
 ) => void;
+
+export type RequestListener = (
+  req: Request,
+  res: Response
+) => void | Promise<void>;

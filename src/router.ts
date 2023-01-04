@@ -1,7 +1,5 @@
-import type { RequestListener } from 'http';
-
 import { Route } from './route';
-import { Middleware, ErrorMiddleware } from './types';
+import { Middleware, ErrorMiddleware, RequestListener } from './types';
 
 export class Router {
   public readonly routes: Map<string, Route>;
