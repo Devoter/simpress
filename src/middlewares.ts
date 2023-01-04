@@ -1,5 +1,4 @@
 import url from 'url';
-import type { ParsedUrlQuery } from 'querystring';
 
 import type { Request, Response } from './types';
 

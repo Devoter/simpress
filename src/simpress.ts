@@ -105,8 +105,8 @@ export class Simpress {
   toListener(): HttpRequestListener {
     return async (req: RawRequest & { pathRegex?: RegExp }, res: Response) => {
       for (const router of this._routers) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for (const [_, route] of router.routes) {
-          // check path and method
           if (route.path.test(req.url ?? '') && req.method === route.method) {
             req.pathRegex = route.path;
 
