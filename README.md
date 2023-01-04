@@ -5,9 +5,10 @@ This package is a simple analogue of [Express.js](https://expressjs.com/).
 ## Installation from git
 
 ```sh
-npm i git+https://github.com/Devoter/simpress
-cd node_modules/simpress
-npm i && npm i -D && npm run build
+gic clone https://github.com/Devoter/simpress.git
+npm ci && npm run build
+cd <your-project>
+npm i <path/to/local/simpress/>
 ```
 
 ## Usage
