@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/Devoter/simpress#readme",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "devDependencies": {
     "@types/node": "^18.11.18",

@@ -7,7 +7,7 @@ This package is a simple analogue of [Express.js](https://expressjs.com/).
 ```sh
 npm i git+https://github.com/Devoter/simpress
 cd node_modules/simpress
-npm ci && npm run build
+npm i && npm i -D && npm run build
 ```
 
 ## Usage
