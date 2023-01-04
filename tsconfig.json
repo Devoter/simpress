@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "ESNext",
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "noStrictGenericChecks": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["es2020"],
+    "newLine": "LF"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "simpress",
+  "version": "1.0.0",
+  "description": "Simple analogue of Express.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rimraf ./dist && bili",
+    "lint": "eslint src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devoter/simpress.git"
+  },
+  "keywords": [
+    "simpress",
+    "express"
+  ],
+  "author": "Alexey Nosov",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Devoter/simpress/issues"
+  },
+  "homepage": "https://github.com/Devoter/simpress#readme",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "bili": "^5.0.5",
+    "eslint": "^8.31.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "rimraf": "^3.0.2",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "typescript": "^4.9.4"
+  }
+}
