@@ -2,13 +2,10 @@
 
 This package is a simple analogue of [Express.js](https://expressjs.com/).
 
-## Installation from git
+## Installation
 
 ```sh
-gic clone https://github.com/Devoter/simpress.git
-npm ci && npm run build
-cd <your-project>
-npm i <path/to/local/simpress/>
+npm i simpressjs
 ```
 
 ## Usage
@@ -18,7 +15,7 @@ Trivial example:
 ```ts
 import { createServer } from 'http';
 
-import { Simpress } from 'simpress';
+import { Simpress } from 'simpressjs';
 
 const host = 'localhost';
 const port = 8000;
