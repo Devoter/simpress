@@ -1,5 +1,5 @@
 {
-  "name": "simpress",
+  "name": "simpressjs",
   "version": "1.0.0",
   "description": "Simple analogue of Express.js",
   "main": "dist/index.js",
